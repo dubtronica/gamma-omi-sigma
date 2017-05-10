@@ -19,20 +19,12 @@
 			<input type = "text" placeholder = "search">
 		<div id = "Table">
 			<table>
-				<tr> 
-					<td> Item Number </td>
-					<td> Type </td>
-					<td> Color </td>
-					<td> Quantity Ordered </td>
-					<td> Total Amount </td>
-				</tr>
-				<tr>
-					<td> (xxxx) <td>
-					<td> (name) </td>
-					<td> (name) </td>
-					<td> (x) </td>
-					<td> (x) </td>
-				</tr>
+				<?php
+ +			 	include 'config.php';
+ +				$sqlresult = $conn->query("SELECT request_item.item_id AS 'Item Number', request_item.product_type AS 'Type', request.color AS 'Color', request.quantity as 'Quantity Ordered', request.total_amount AS 'Total Amount' FROM request_item, request WHERE request_item.item_id = item.item_id AND request.product_type = request_item.product_type;");
+ +	            echo sql_to_html_table($sqlresult, $delim = "\n");
+ +				$conn->close();
+ +			 ?>
 				<tr>
 					<th> Total Sales </th>
 					<td> (x) </td>
